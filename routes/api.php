@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::prefix('v1')->group(function () {
+    // authentification
     Route::controller(AuthController::class)->group(function () {
         Route::post('login', 'login');
         Route::post('register', 'register');
@@ -29,6 +30,7 @@ Route::prefix('v1')->group(function () {
         Route::post('refresh', 'refresh');
     });
 
+    // users management
     Route::group(['middleware' => ['auth:api']], function () {
         Route::apiResource('users', UserController::class);
     });
