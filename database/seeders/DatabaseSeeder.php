@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             PermissionTableSeeder::class,
             CreateAdminUserSeeder::class,
             CreateCustomerUserSeeder::class,
+            CountrySeeder::class,
+            CitySeeder::class,
             HotelSeeder::class,
             RoomSeeder::class,
             ReservationSeeder::class

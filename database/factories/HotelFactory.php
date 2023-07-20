@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use App\Models\Hotel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -26,9 +27,14 @@ class HotelFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'        => fake()->city(),
-            'location'    => fake()->address(),
-            'description' => fake()->paragraphs(fake()->numerify("#"), true),
+            'name'            => fake()->city(),
+            'location'        => fake()->address(),
+            'description'     => fake()->paragraphs(fake()->numerify("#"), true),
+            'hotel_latitude'  => fake()->latitude(),
+            'hotel_longitude' => fake()->longitude(),
+            'city_id'         => function () {
+                return City::all()->random()->id;
+            },
         ];
     }
 }

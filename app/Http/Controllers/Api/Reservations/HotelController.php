@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Validator;
 
 class HotelController extends Controller
 {
+    private array $validationRule = [
+        'name'            => 'required|max:225', // Le nom est requis et ne doit pas dépasser 225 caractères
+        'location'        => 'required|max:225', // L'emplacement est requis et ne doit pas dépasser 225 caractères
+        'hotel_latitude'  => 'nullable|numeric', // La latitude de l'hôtel est facultative et doit être numérique
+        'hotel_longitude' => 'nullable|numeric', // La longitude de l'hôtel est facultative et doit être numérique
+        'city_id'         => 'nullable|exists:cities,id', // L'ID de la ville est facultative
+        'description'     => 'nullable',         // La description est facultative
+    ];
+
     public function __construct()
     {
         // $this->middleware('spartie')->only('store');
@@ -42,11 +51,7 @@ class HotelController extends Controller
     public function store(Request $request)
     {
         // Créer un validateur pour les données de la requête
-        $validator = Validator::make($request->all(), [
-            'name'        => 'required|max:225', // Le nom est requis et ne doit pas dépasser 225 caractères
-            'location'    => 'required|max:225', // L'emplacement est requis et ne doit pas dépasser 225 caractères
-            'description' => 'nullable',         // La description est facultative
-        ]);
+        $validator = Validator::make($request->all(), $this->validationRule);
 
         // Vérifier si la validation échoue
         if ($validator->fails()) {
@@ -93,11 +98,7 @@ class HotelController extends Controller
         }
 
         // Créer un validateur pour les données de la requête
-        $validator = Validator::make($request->all(), [
-            'name'        => 'nullable|max:225',
-            'location'    => 'nullable|max:225',
-            'description' => 'nullable',
-        ]);
+        $validator = Validator::make($request->all(), $this->validationRule);
 
         // Vérifier si la validation échoue
         if ($validator->fails()) {

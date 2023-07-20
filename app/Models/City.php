@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hotel extends Model
+class City extends Model
 {
     use HasFactory;
 
@@ -16,11 +16,9 @@ class Hotel extends Model
      */
     protected $fillable = [
         'name',
-        'location',
-        'description',
-        'hotel_latitude',
-        'hotel_longitude',
-        'city_id',
+        'latitude',
+        'longitude',
+        'country_id',
     ];
 
     /**
@@ -29,7 +27,7 @@ class Hotel extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'city_id'
+        'country_id'
     ];
 
     /**

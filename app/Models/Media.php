@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hotel extends Model
+class Media extends Model
 {
     use HasFactory;
 
@@ -15,12 +15,12 @@ class Hotel extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'location',
-        'description',
-        'hotel_latitude',
-        'hotel_longitude',
-        'city_id',
+        'title',
+        'file_path',
+        'type',
+        'extension',
+        'user_id',
+        'deleted'
     ];
 
     /**
@@ -29,7 +29,7 @@ class Hotel extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'city_id'
+        'user_id'
     ];
 
     /**
@@ -40,5 +40,6 @@ class Hotel extends Model
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
+        'delete'     => 'boolean',
     ];
 }

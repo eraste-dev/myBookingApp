@@ -1,0 +1,326 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Booking App",
+    "dateExported": "2023-07-20T15:52:13.999Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "8c3b76b4-ca78-4a64-9eff-44502e2fadd3",
+            "name": "Authentification",
+            "containerId": "",
+            "created": "2023-07-09T20:03:16.128Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "672f8639-7b17-41e3-a56e-ff1732e22d93",
+            "name": "Hotels",
+            "containerId": "53b2d725-5d8a-409d-8da3-17ded2a75fa6",
+            "created": "2023-07-20T09:24:09.707Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "78f80609-d483-42b9-a7c0-6e082ab07c9c",
+            "name": "Users",
+            "containerId": "",
+            "created": "2023-07-19T10:51:41.176Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "2484600d-6ca3-4956-b50b-89b88be5d8d9",
+            "name": "Rooms",
+            "containerId": "53b2d725-5d8a-409d-8da3-17ded2a75fa6",
+            "created": "2023-07-20T10:19:43.889Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "53b2d725-5d8a-409d-8da3-17ded2a75fa6",
+            "name": "Reservtions",
+            "containerId": "",
+            "created": "2023-07-20T10:19:36.732Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "958144a1-2b70-4d02-9f9d-3a99773ab425",
+            "name": "Reservations",
+            "containerId": "53b2d725-5d8a-409d-8da3-17ded2a75fa6",
+            "created": "2023-07-20T10:30:17.653Z",
+            "sortNum": 30000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "16dc67de-34af-4eba-98fa-c6e2d4ca6f7c",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "8c3b76b4-ca78-4a64-9eff-44502e2fadd3",
+            "name": "Login",
+            "url": "{{API}}/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-07-09T20:04:13.587Z",
+            "modified": "2023-07-09T20:05:16.932Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"keraste38@gmail.com\",\n  \"password\": \"password\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "416c1d4f-245a-4915-ab0d-42018d400ecd",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "78f80609-d483-42b9-a7c0-6e082ab07c9c",
+            "name": "Get All Users",
+            "url": "{{API}}/users",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-07-19T10:51:41.176Z",
+            "modified": "2023-07-19T12:38:19.717Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "560f30ee-066a-4539-8854-a635deaf213d",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "672f8639-7b17-41e3-a56e-ff1732e22d93",
+            "name": "Get All Hotels",
+            "url": "{{API}}/hotels",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-07-20T09:24:09.707Z",
+            "modified": "2023-07-20T09:25:26.387Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8b11aff1-a182-4d06-9d71-9c0f7eabefe1",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "2484600d-6ca3-4956-b50b-89b88be5d8d9",
+            "name": "Get All Rooms",
+            "url": "{{API}}/rooms",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-07-20T10:19:43.889Z",
+            "modified": "2023-07-20T10:20:05.320Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "477839e4-4895-46ee-9382-9e14f0c3227f",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "958144a1-2b70-4d02-9f9d-3a99773ab425",
+            "name": "Get All Reservations",
+            "url": "{{API}}/reservations",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-07-20T10:30:17.653Z",
+            "modified": "2023-07-20T10:30:38.416Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "0228e353-1108-4bea-a697-f991ddbd5b17",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "8c3b76b4-ca78-4a64-9eff-44502e2fadd3",
+            "name": "register",
+            "url": "{{API}}/register",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-07-10T12:25:56.105Z",
+            "modified": "2023-07-19T11:00:15.510Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Kouakou Eraste\",\n  \"email\": \"keraste38@gmail.com\",\n  \"phone\": \"+225-0789670552\",\n  \"password\": \"password\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "94ee35fb-f949-4e4c-91a6-ec6deef8faa2",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "672f8639-7b17-41e3-a56e-ff1732e22d93",
+            "name": "Save hotel",
+            "url": "{{API}}/hotels",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-07-20T10:49:00.567Z",
+            "modified": "2023-07-20T15:00:41.269Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Hotel de Test\",\n  \"location\": \"Paris, France\",\n  \"hotel_latitude\": 48.8566,\n  \"hotel_longitude\": 2.3522,\n  \"city_id\": 1,\n  \"description\": \"Ceci est un hôtel de test situé à Paris.\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e78fd0e0-3d8e-4823-9f12-630be2c23de7",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "2484600d-6ca3-4956-b50b-89b88be5d8d9",
+            "name": "Save room",
+            "url": "{{API}}/rooms",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-07-20T12:01:13.017Z",
+            "modified": "2023-07-20T12:04:45.826Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Hotel de Test\",\n  \"hotel_id\": 4,\n  \"price\": 100,\n  \"type\": \"Chambre double\",\n  \"availability\": true\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "55caeda2-815f-4725-b68a-6dd8813d50a8",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "672f8639-7b17-41e3-a56e-ff1732e22d93",
+            "name": "Update hotel",
+            "url": "{{API}}/hotels/100",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2023-07-20T11:04:10.953Z",
+            "modified": "2023-07-20T11:29:42.991Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Hotel de Testxxxx\",\n  \"location\": \"Paris, France\",\n  \"description\": \"Ceci est un hôtel de test situé à Paris.\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "62d4fe03-c8d6-4ce5-9c6a-1ec09f9ebacc",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "2484600d-6ca3-4956-b50b-89b88be5d8d9",
+            "name": "Update room",
+            "url": "{{API}}/rooms/21",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2023-07-20T12:09:24.836Z",
+            "modified": "2023-07-20T12:10:31.059Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Hotel de Test renmae\",\n  \"hotel_id\": 4,\n  \"price\": 100,\n  \"type\": \"Chambre double\",\n  \"availability\": true\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6c9631a3-2abf-4786-b8b1-7495c3d3d57e",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "672f8639-7b17-41e3-a56e-ff1732e22d93",
+            "name": "Detail hotel",
+            "url": "{{API}}/hotels/2",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-07-20T11:32:57.581Z",
+            "modified": "2023-07-20T11:33:42.344Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "892c3a1f-32b8-428a-a1e7-db763015045b",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "2484600d-6ca3-4956-b50b-89b88be5d8d9",
+            "name": "Detail room",
+            "url": "{{API}}/rooms/1",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-07-20T12:16:34.475Z",
+            "modified": "2023-07-20T12:17:22.792Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "dab67b68-889c-4fdd-87b7-266802ff7e24",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "672f8639-7b17-41e3-a56e-ff1732e22d93",
+            "name": "Delete hotel",
+            "url": "{{API}}/hotels/3",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2023-07-20T11:38:14.755Z",
+            "modified": "2023-07-20T11:45:55.097Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "de4289ba-59ec-4f5a-a057-fb4462eff8a3",
+            "colId": "3c62db4c-1bd0-4235-a076-9eb4342ab28d",
+            "containerId": "2484600d-6ca3-4956-b50b-89b88be5d8d9",
+            "name": "Delete room",
+            "url": "{{API}}/rooms/3",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2023-07-20T12:16:37.424Z",
+            "modified": "2023-07-20T12:18:19.475Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{TOKEN}}"
+            },
+            "tests": []
+        }
+    ]
+}
