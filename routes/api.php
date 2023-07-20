@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\Reservations\HotelController;
+use App\Http\Controllers\Api\Reservations\RoomController;
+use App\Http\Controllers\Api\Reservations\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +35,10 @@ Route::prefix('v1')->group(function () {
 
     // users management
     Route::group(['middleware' => ['auth:api']], function () {
-        Route::apiResource('users',  UserController::class);
-        Route::apiResource('hotels', HotelController::class);
+        Route::apiResource('users',         UserController::class);
+        Route::apiResource('hotels',        HotelController::class);
+        Route::apiResource('rooms',         RoomController::class);
+        Route::apiResource('reservations',  ReservationController::class);
     });
 });
 

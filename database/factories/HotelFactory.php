@@ -28,7 +28,7 @@ class HotelFactory extends Factory
         return [
             'name'        => fake()->city(),
             'location'    => fake()->address(),
-            'description' => fake()->paragraphs(fake()->numerify("#")),
+            'description' => fake()->paragraphs(fake()->numerify("#"), true),
         ];
     }
 }

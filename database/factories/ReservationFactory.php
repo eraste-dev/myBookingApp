@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -12,13 +13,6 @@ use Illuminate\Support\Str;
 class ReservationFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Room::class;
-
-    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -26,20 +20,14 @@ class ReservationFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id'        => fake()->randomNumber(),
-            'room_id'        => fake()->randomNumber(),
-            'check_in_date'  => fake()->date(),
-            'check_out_date' => fake()->date(),
+            'user_id'        => function () {
+                return User::all()->random()->id;
+            },
+            'room_id'        => function () {
+                return Room::all()->random()->id;
+            },
+            'check_in_date'  => fake()->date('Y-m-d H:i:s'),
+            'check_out_date' => fake()->date('Y-m-d H:i:s'),
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
     }
 }
