@@ -1,0 +1,900 @@
+{
+    "info": {
+        "_postman_id": "f5c2b2ef-db46-401b-9803-b2cf4717a8bf",
+        "name": "Booking App",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "Authentification",
+            "item": [
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "{{API}}/login",
+                            "path": [
+                                "login"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"email\": \"keraste38@gmail.com\",\n  \"password\": \"password\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "register",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "{{API}}/register",
+                            "path": [
+                                "register"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"name\": \"Kouakou Eraste\",\n  \"email\": \"keraste38@gmail.com\",\n  \"phone\": \"+225-0789670552\",\n  \"password\": \"password\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Get All Users",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{API}}/users",
+                            "path": [
+                                "users"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Reservtions",
+            "item": [
+                {
+                    "name": "Hotels",
+                    "item": [
+                        {
+                            "name": "Get All Hotels",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "{{API}}/hotels",
+                                    "path": [
+                                        "hotels"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Save hotel",
+                            "request": {
+                                "method": "POST",
+                                "url": {
+                                    "raw": "{{API}}/hotels",
+                                    "path": [
+                                        "hotels"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    },
+                                    "raw": "{\n  \"name\": \"Hotel de Test\",\n  \"location\": \"Paris, France\",\n  \"hotel_latitude\": 48.8566,\n  \"hotel_longitude\": 2.3522,\n  \"city_id\": 1,\n  \"description\": \"Ceci est un hôtel de test situé à Paris.\"\n}"
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update hotel",
+                            "request": {
+                                "method": "PUT",
+                                "url": {
+                                    "raw": "{{API}}/hotels/100",
+                                    "path": [
+                                        "hotels",
+                                        "100"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    },
+                                    "raw": "{\n  \"name\": \"Hotel de Testxxxx\",\n  \"location\": \"Paris, France\",\n  \"description\": \"Ceci est un hôtel de test situé à Paris.\"\n}"
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Detail hotel",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "{{API}}/hotels/2",
+                                    "path": [
+                                        "hotels",
+                                        "2"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Delete hotel",
+                            "request": {
+                                "method": "DELETE",
+                                "url": {
+                                    "raw": "{{API}}/hotels/3",
+                                    "path": [
+                                        "hotels",
+                                        "3"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Rooms",
+                    "item": [
+                        {
+                            "name": "Get All Rooms",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "{{API}}/rooms",
+                                    "path": [
+                                        "rooms"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Save room",
+                            "request": {
+                                "method": "POST",
+                                "url": {
+                                    "raw": "{{API}}/rooms",
+                                    "path": [
+                                        "rooms"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    },
+                                    "raw": "{\n  \"name\": \"Hotel de Test\",\n  \"hotel_id\": 4,\n  \"price\": 100,\n  \"type\": \"Chambre double\",\n  \"availability\": true\n}"
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update room",
+                            "request": {
+                                "method": "PUT",
+                                "url": {
+                                    "raw": "{{API}}/rooms/21",
+                                    "path": [
+                                        "rooms",
+                                        "21"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    },
+                                    "raw": "{\n  \"name\": \"Hotel de Test renmae\",\n  \"hotel_id\": 4,\n  \"price\": 100,\n  \"type\": \"Chambre double\",\n  \"availability\": true\n}"
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Detail room",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "{{API}}/rooms/1",
+                                    "path": [
+                                        "rooms",
+                                        "1"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Delete room",
+                            "request": {
+                                "method": "DELETE",
+                                "url": {
+                                    "raw": "{{API}}/rooms/3",
+                                    "path": [
+                                        "rooms",
+                                        "3"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Reservations",
+                    "item": [
+                        {
+                            "name": "Get All Reservations",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "{{API}}/reservations",
+                                    "path": [
+                                        "reservations"
+                                    ],
+                                    "host": [
+                                        "{{api}}"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{TOKEN}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Countries",
+            "item": [
+                {
+                    "name": "Get All countries",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{API}}/countries",
+                            "path": [
+                                "countries"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Save countries",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "{{API}}/countries",
+                            "path": [
+                                "countries"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"name\": \"France\",\n  \"iso_code\": \"FR\",\n  \"latitude\": 46.603354,\n  \"longitude\": 1.888334\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update countries",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "{{API}}/countries/2",
+                            "path": [
+                                "countries",
+                                "2"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"name\": \"France\",\n  \"iso_code\": \"XRX\",\n  \"latitude\": 46.603354,\n  \"longitude\": 1.888334\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Detail countries",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{API}}/countries/2",
+                            "path": [
+                                "countries",
+                                "2"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete countries",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "{{API}}/countries/3",
+                            "path": [
+                                "countries",
+                                "3"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Cities",
+            "item": [
+                {
+                    "name": "Get All cities",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{API}}/cities",
+                            "path": [
+                                "cities"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Save cities",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "{{API}}/cities",
+                            "path": [
+                                "cities"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"name\": \"Paris\",\n  \"latitude\": 48.8566,\n  \"longitude\": 2.3522,\n  \"country_id\": 4\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update cities",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "{{API}}/cities/2",
+                            "path": [
+                                "cities",
+                                "2"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"id\": 201,\n  \"name\": \"Paris\",\n  \"latitude\": 48.8566,\n  \"longitude\": 2.3522,\n  \"country_id\": 6\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Detail cities",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{API}}/cities/2",
+                            "path": [
+                                "cities",
+                                "2"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete cities",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "{{API}}/cities/3",
+                            "path": [
+                                "cities",
+                                "3"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Media",
+            "item": [
+                {
+                    "name": "Get All cities",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{API}}/cities",
+                            "path": [
+                                "cities"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Save cities",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "{{API}}/media",
+                            "path": [
+                                "media"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "destination",
+                                    "value": "hotels",
+                                    "type": "default"
+                                },
+                                {
+                                    "key": "title",
+                                    "value": "Titre du fichier",
+                                    "type": "default"
+                                },
+                                {
+                                    "key": "file",
+                                    "src": "/home/eraste-dev/Images/Capture d’écran du 2023-06-27 11-29-23.png",
+                                    "type": "file"
+                                },
+                                {
+                                    "key": "file",
+                                    "src": "/home/eraste-dev/Images/Capture d’écran du 2023-06-27 12-44-25.png",
+                                    "disabled": true,
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update cities",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "{{API}}/cities/2",
+                            "path": [
+                                "cities",
+                                "2"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"id\": 201,\n  \"name\": \"Paris\",\n  \"latitude\": 48.8566,\n  \"longitude\": 2.3522,\n  \"country_id\": 6\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Detail cities",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{API}}/cities/2",
+                            "path": [
+                                "cities",
+                                "2"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete cities",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "{{API}}/cities/3",
+                            "path": [
+                                "cities",
+                                "3"
+                            ],
+                            "host": [
+                                "{{api}}"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{TOKEN}}",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

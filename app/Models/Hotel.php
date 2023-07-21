@@ -21,6 +21,8 @@ class Hotel extends Model
         'hotel_latitude',
         'hotel_longitude',
         'city_id',
+        'thumbnail',
+        'images',
     ];
 
     /**

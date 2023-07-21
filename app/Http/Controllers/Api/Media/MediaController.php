@@ -6,16 +6,15 @@ use App\Models\Media;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MediaResource;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+
 
 final class MediaController extends Controller
 {
-    private string $mediaRoot = "public/uploads/";
-
     private array $validationRule = [
         'file'        => 'required|file|mimes:jpg,jpeg,png,gif,bmp,svg,webp,mp4,mov,wmv,avi,flv,mkv,webm,pdf,doc,docx,xls,xlsx,ppt,pptx,txt|max:153600',
         'destination' => 'required|max:50',
+        'user_id'     => 'required|exists:users,id',
         'title'       => 'nullable|max:60'
     ];
 
@@ -25,14 +24,21 @@ final class MediaController extends Controller
     }
 
     /**
-     * Cette fonction permet de télécharger un fichier.
+     * Cette fonction permet de télécharger plusieurs fichiers ou un seul fichier.
      *
-     * @param Request $request Requête HTTP contenant les informations du fichier à télécharger.
+     * @param Request $request Requête HTTP contenant les informations des fichiers à télécharger.
      * @return \Illuminate\Http\JsonResponse Retourne une réponse JSON indiquant le succès ou l'échec du téléchargement.
      */
     public function store(Request $request)
     {
-        // Création d'un validateur pour vérifier les données de la requête
+        // Modification de la règle de validation pour accepter plusieurs fichiers
+        // La clé 'file' est maintenant un tableau
+        $this->validationRule['file'] = 'required|array';
+
+        // Ajout d'une règle de validation pour chaque fichier dans le tableau
+        $this->validationRule['file.*'] = 'file|mimes:jpg,jpeg,png,gif,bmp,svg,webp,mp4,mov,wmv,avi,flv,mkv,webm,pdf,doc,docx,xls,xlsx,ppt,pptx,txt|max:153600';
+
+        // Création d'un validateur avec les règles de validation et les données de la requête
         $validator = Validator::make($request->all(), $this->validationRule);
 
         // Si la validation échoue, retourne une réponse JSON avec les erreurs
@@ -43,30 +49,62 @@ final class MediaController extends Controller
             ]), 400);
         }
 
-        // Récupération du fichier de la requête
-        $file = $request->file('file');
-        $fileName = is_null($request->title) ? $file->getClientOriginalName() : $request->title;
+        // Récupération des fichiers de la requête
+        $files = $request->file('file');
 
-        // Stockage du fichier dans le dossier 'public/uploads'
-        $path = $file->store($this->mediaRoot . $request->destination);
-        $path =  $file->storeAs('public', $fileName);
-
-        // Création d'un nouvel objet Media
-        $media = new Media();
-        // Attribution des propriétés à l'objet Media
-        $media->title = $fileName; // Nom original du fichier
-        $media->file_path = $path; // Chemin du fichier
-        $media->type = $file->getClientMimeType(); // Type MIME du fichier
-        $media->extension = $file->getClientOriginalExtension(); // Extension du fichier
-        $media->user_id = Auth::guard('api')->user()->id; // ID de l'utilisateur authentifié
-        $media->deleted = false; // Le fichier n'est pas supprimé
-        // Sauvegarde de l'objet Media dans la base de données
-        $media->save();
+        // Appel de la méthode uploadFile pour télécharger les fichiers
+        $uploadFiles = Media::uploadFile($files, $request->destination, $request->user_id, $request->title);
 
         // Retourne une réponse JSON indiquant le succès du téléchargement
         return response()->json(Controller::standard([
-            'data'    => new MediaResource($media),
-            'message' => 'Fichier importé avec succès'
+            'data'    => $uploadFiles,
+            'message' => 'Fichiers importés avec succès'
+        ]));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        // Modification de la règle de validation pour accepter plusieurs fichiers
+        // La clé 'file' est maintenant un tableau
+        $this->validationRule['file'] = 'required|array';
+
+        // Ajout d'une règle de validation pour chaque fichier dans le tableau
+        $this->validationRule['file.*'] = 'file|mimes:jpg,jpeg,png,gif,bmp,svg,webp,mp4,mov,wmv,avi,flv,mkv,webm,pdf,doc,docx,xls,xlsx,ppt,pptx,txt|max:153600';
+
+        // Création d'un validateur avec les règles de validation et les données de la requête
+        $validator = Validator::make($request->all(), $this->validationRule);
+
+        // Si la validation échoue, retourne une réponse JSON avec les erreurs
+        if ($validator->fails()) {
+            return response()->json(Controller::standard([
+                'message' => "Une erreur s'est produite",
+                'error' => $validator->errors()
+            ]), 400);
+        }
+
+        // Trouver l'hôtel par son ID
+        $media = Media::find($id);
+
+        // Vérifier si l'hôtel n'existe pas
+        if (is_null($media)) {
+            // Retourner une réponse d'erreur si l'hôtel n'est pas trouvé
+            return response()->json(Controller::standard([
+                'message' => 'Une erreur s\'est produite lors de la validation! Veuillez réessayer',
+                'error'   => 'ressource non trouvée'
+            ]), 404);
+        }
+
+        // Récupération des fichiers de la requête
+        $files = $request->file('file');
+
+        // Appel de la méthode uploadFile pour télécharger les fichiers
+        $uploadFiles = Media::uploadFile($files, $request->destination, $request->user_id, $request->title);
+
+        // Retourne une réponse JSON indiquant le succès du téléchargement
+        return response()->json(Controller::standard([
+            'data'    => $uploadFiles,
+            'message' => 'Fichiers importés avec succès'
         ]));
     }
 }

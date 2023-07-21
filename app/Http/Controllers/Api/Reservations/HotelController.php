@@ -6,6 +6,9 @@ use App\Models\Hotel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\HotelResource;
+use App\Models\Media;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class HotelController extends Controller
@@ -17,7 +20,11 @@ class HotelController extends Controller
         'hotel_longitude' => 'nullable|numeric', // La longitude de l'hôtel est facultative et doit être numérique
         'city_id'         => 'nullable|exists:cities,id', // L'ID de la ville est facultative
         'description'     => 'nullable',         // La description est facultative
+        'thumbnail'       => 'nullable|file|mimes:jpg,jpeg,png,gif,bmp,svg,webp,mp4,mov,wmv,avi,flv,mkv,webm,pdf,doc,docx,xls,xlsx,ppt,pptx,txt|max:153600', // La vignette est facultative
+        'images'          => 'nullable|array|mimes:jpg,jpeg,png,gif,bmp,svg,webp,mp4,mov,wmv,avi,flv,mkv,webm,pdf,doc,docx,xls,xlsx,ppt,pptx,txt|max:153600', // Les images sont facultatives
     ];
+
+    private string $pathUpload = 'hotels';
 
     public function __construct()
     {
@@ -62,8 +69,25 @@ class HotelController extends Controller
             ]), 422);
         }
 
+        // Les données validées sont stockées dans la variable $dataValidated
+        $dataValidated = $validator->validated();
+
+        // Vérifier si une vignette a été fournie dans la requête
+        if (!is_null($request->thumbnail) && !is_null($request->file('thumbnail'))) {
+            // Si une vignette a été fournie, la télécharger et stocker son ID dans $dataValidated['thumbnail']
+            $uploadThumbnail = Media::uploadFile([$request->file('thumbnail')], $this->pathUpload, Auth::guard('api')->user()->id);
+            $dataValidated['thumbnail'] = $uploadThumbnail['ids'];
+        }
+
+        // Vérifier si des images ont été fournies dans la requête
+        if (!is_null($request->images) && !is_null($request->file('images'))) {
+            // Si des images ont été fournies, les télécharger et stocker leurs ID dans $dataValidated['images']
+            $uploadImages = Media::uploadFile($request->file('images'), $this->pathUpload, Auth::guard('api')->user()->id);
+            $dataValidated['images'] = $uploadImages['ids'];
+        }
+
         // Créer un nouvel hôtel avec les données validées
-        $hotel = Hotel::create($validator->validated());
+        $hotel = Hotel::create($dataValidated);
 
         // Retourner une réponse avec les données de l'hôtel nouvellement créé
         return response()->json(Controller::standard([
@@ -71,6 +95,7 @@ class HotelController extends Controller
             'message' => 'Hôtel enregistré avec succès'
         ]));
     }
+
 
     /**
      * Cette fonction met à jour un hôtel existant avec les données fournies dans la requête.
@@ -108,8 +133,25 @@ class HotelController extends Controller
             ]), 422);
         }
 
+        // Les données validées sont stockées dans la variable $dataValidated
+        $dataValidated = $validator->validated();
+
+        // Vérifier si une vignette a été fournie dans la requête
+        if (!is_null($request->thumbnail) && !is_null($request->file('thumbnail'))) {
+            // Si une vignette a été fournie, la télécharger et stocker son ID dans $dataValidated['thumbnail']
+            $uploadThumbnail = Media::uploadFile([$request->file('thumbnail')], $this->pathUpload, Auth::guard('api')->user()->id);
+            $dataValidated['thumbnail'] = $uploadThumbnail['ids'];
+        }
+
+        // Vérifier si des images ont été fournies dans la requête
+        if (!is_null($request->images) && !is_null($request->file('images'))) {
+            // Si des images ont été fournies, les télécharger et stocker leurs ID dans $dataValidated['images']
+            $uploadImages = Media::uploadFile($request->file('images'), $this->pathUpload, Auth::guard('api')->user()->id);
+            $dataValidated['images'] = $uploadImages['ids'];
+        }
+
         // Mettre à jour l'hôtel avec les données validées
-        $hotel->update($validator->validated());
+        $hotel->update($dataValidated);
 
         // Retourner une réponse avec les données de l'hôtel mis à jour
         return response()->json(Controller::standard([

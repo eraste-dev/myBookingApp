@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\City;
+use App\Models\Media;
 
 class HotelResource extends JsonResource
 {
@@ -22,8 +23,10 @@ class HotelResource extends JsonResource
             'location'        => $this->location,
             'hotel_latitude'  => $this->hotel_latitude,
             'hotel_longitude' => $this->hotel_longitude,
-            'city'            => new CityResource(City::find($this->city_id)),
             'description'     => $this->description,
+            'thumbnail'       => new MediaResource(Media::find($this->thumbnail)),
+            'images'          => MediaResource::collection(Media::ByIds($this->images)),
+            'city'            => new CityResource(City::find($this->city_id)),
             'created_at'      => $this->created_at,
             'updated_at'      => $this->updated_at
         ];

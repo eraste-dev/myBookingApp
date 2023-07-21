@@ -17,12 +17,13 @@ class MediaResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id'        => $this->id,
             'title'     => $this->title,
             'file_path' => asset($this->file_path),
             'type'      => $this->type,
             'extension' => $this->extension,
             'deleted'   => $this->deleted,
-            'user'      => new UserResource(User::find($this->country_id)),
+            'user'      => new UserResource(User::find($this->user_id)),
         ];
     }
 }
