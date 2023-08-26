@@ -6,6 +6,7 @@ use App\Models\Media;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MediaResource;
+use Illuminate\Http\Exceptions\PostTooLargeException;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -61,7 +62,6 @@ final class MediaController extends Controller
             'message' => 'Fichiers importés avec succès'
         ]));
     }
-
 
     public function update(Request $request, $id)
     {

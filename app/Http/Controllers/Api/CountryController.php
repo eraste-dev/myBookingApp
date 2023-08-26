@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CountryCollection;
 use App\Http\Resources\CountryResource;
 use Illuminate\Support\Facades\Validator;
 
@@ -44,7 +45,7 @@ class CountryController extends Controller
 
         // Retourner une réponse JSON avec les données des pays et un message
         return response()->json(Controller::standard([
-            'data'    => CountryResource::collection($countries),
+            'data'    => CountryCollection::collection($countries),
             'message' => 'Pays trouvés'
         ]));
     }

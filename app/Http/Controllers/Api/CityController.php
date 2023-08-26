@@ -6,6 +6,7 @@ use App\Models\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CityResource;
+use App\Http\Resources\CityCollection;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -34,17 +35,19 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    function index()
+    public function index()
     {
+        // $per_page = $request->per_page | 15;
         // Récupérer les villes de la base de données, triées par ordre de création et paginées
         $cities = City::latest()->paginate();
 
         // Retourner une réponse JSON avec les données des villes et un message
         return response()->json(Controller::standard([
-            'data'    => CityResource::collection($cities),
+            'data'    => new CityCollection($cities),
             'message' => 'Villes trouvées'
         ]));
     }
+
 
     /**
      * Cette fonction crée une nouvelle ville avec les données fournies dans la requête.
@@ -192,4 +195,3 @@ class CityController extends Controller
         ]));
     }
 }
-

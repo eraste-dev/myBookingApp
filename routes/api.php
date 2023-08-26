@@ -31,13 +31,16 @@ Route::prefix('v1')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::post('login', 'login');
         Route::post('register', 'register');
-        Route::post('logout', 'logout');
-        Route::post('refresh', 'refresh');
+        Route::group(['middleware' => ['auth:jwt.auth']], function () {
+            Route::post('logout', 'logout');
+            Route::post('refresh', 'refresh');
+        });
     });
 
-    Route::apiResource('media',         MediaController::class);
+    // Route::apiResource('media',         MediaController::class);
 
-    Route::group(['middleware' => ['auth:api']], function () {
+    Route::group(['middleware' => ['auth:api', 'jwt.auth']], function () {
+        Route::apiResource('media',         MediaController::class);
         Route::apiResource('users',         UserController::class);
         Route::apiResource('countries',     CountryController::class);
         Route::apiResource('cities',        CityController::class);

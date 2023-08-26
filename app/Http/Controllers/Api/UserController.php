@@ -15,10 +15,13 @@ class UserController extends Controller
         // $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
-    function index()
+    function index(Request $request)
     {
         $users = User::latest()->paginate();
-        return UserResource::collection($users);
-        // return response()->json(Controller::standard(['data' => $users, 'message' => 'users found']));
+        return $data  = UserResource::collection($users);
+        return response()->json(Controller::standard([
+            'data'    => $data, // UserResource::collection($users)
+            'message' => 'users found'
+        ]));
     }
 }

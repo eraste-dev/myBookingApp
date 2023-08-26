@@ -42,6 +42,13 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Registers a new user.
+     *
+     * @param Request $request The HTTP request object.
+     * @throws Exception if validation fails.
+     * @return JsonResponse The JSON response containing the user data or error messages.
+     */
     public function register(Request $request)
     {
         $validator = Validator::make(
